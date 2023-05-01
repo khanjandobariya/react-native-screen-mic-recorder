@@ -56,7 +56,7 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
 
         if (resultCode == Activity.RESULT_OK) {
           Log.d("ScreenRecorder", "User accepted permission");
-          hbRecorder.startScreenRecording(intent, resultCode);
+          hbRecorder.startScreenRecording(intent, resultCode, getCurrentActivity());
         }
       }
     });
@@ -79,6 +79,10 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
     hbRecorder.isAudioEnabled(!config.hasKey("mic") || (boolean) config.getBoolean("mic"));
     hbRecorder.setVideoEncoder("DEFAULT");
     hbRecorder.setOutputPath(outputUri.toString());
+
+    boolean notificationActionEnabled = config.hasKey("notificationActionEnabled") && (boolean) config.getBoolean("notificationActionEnabled");
+    hbRecorder.setNotificationActionEnabled(notificationActionEnabled);
+    if (!notificationActionEnabled) hbRecorder.setNotificationDescription("Stop recording from the application");
 
     try{ // Requesting user permissions
       MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) reactContext.getSystemService (Context.MEDIA_PROJECTION_SERVICE);
@@ -131,15 +135,5 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
   public void HBRecorderOnError(int errorCode, String reason) {
     Log.d("ScreenRecorder", "HBRecorderOnError : " + errorCode + " " + reason);
     startPromise.reject("404", "RecorderOnError:" + errorCode + " " + reason);
-  }
-
-  @Override
-  public void HBRecorderOnPause() {
-
-  }
-
-  @Override
-  public void HBRecorderOnResume() {
-
   }
 }
