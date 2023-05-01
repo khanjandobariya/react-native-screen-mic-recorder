@@ -1,0 +1,67 @@
+{
+  "name": "react-native-screen-mic-recorder",
+  "version": "0.1.4",
+  "description": "Screen recorder with optional mic recording, useful for video overlay without processing when recording react-native-camera or expo-camera",
+  "main": "src/index",
+  "module": "src/index",
+  "react-native": "src/index",
+  "source": "src/index",
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "cpp",
+    "react-native-screen-mic-recorder.podspec",
+    "!lib/typescript/example",
+    "!android/build",
+    "!ios/build"
+  ],
+  "scripts": {
+    "example": "yarn --cwd example",
+    "pods": "cd example && pod-install --quiet",
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "mapAndroidPort": "adb reverse tcp:8081 tcp:8081",
+    "startAndroidStudio": "open -a /Applications/Android\\ Studio.app"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "android"
+  ],
+  "repository": "https://github.com/umbertoghio/react-native-screen-mic-recorder",
+  "author": "Umberto Ghio <umberto@ghio.io> (https://github.com/umbertoghio)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umbertoghio/react-native-screen-mic-recorder/issues"
+  },
+  "homepage": "https://github.com/umbertoghio/react-native-screen-mic-recorder#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "pod-install": "^0.1.0",
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "standard": "^17.0.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "test",
+      "jest",
+      "expect",
+      "fetch",
+      "navigator",
+      "__DEV__",
+      "__static",
+      "XMLHttpRequest",
+      "FormData",
+      "React$Element"
+    ]
+  }
+}
