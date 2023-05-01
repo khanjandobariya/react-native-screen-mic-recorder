@@ -58,5 +58,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'com.github.khanjandobariya:HBRecorder:master-SNAPSHOT'
+    implementation 'com.github.khanjandobariya:HBRecorder:master'
 }
