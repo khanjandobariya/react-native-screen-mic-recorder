@@ -56,7 +56,7 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
 
         if (resultCode == Activity.RESULT_OK) {
           Log.d("ScreenRecorder", "User accepted permission");
-          hbRecorder.startScreenRecording(intent, resultCode, getCurrentActivity());
+          hbRecorder.startScreenRecording(intent, resultCode);
         }
       }
     });
@@ -68,7 +68,6 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
     return NAME;
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @ReactMethod
   public void startRecording(ReadableMap config, Promise promise){
     startPromise = promise;
@@ -80,10 +79,6 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
     hbRecorder.setVideoEncoder("DEFAULT");
     hbRecorder.setOutputPath(outputUri.toString());
 
-    boolean notificationActionEnabled = config.hasKey("notificationActionEnabled") && (boolean) config.getBoolean("notificationActionEnabled");
-    hbRecorder.setNotificationActionEnabled(notificationActionEnabled);
-    if (!notificationActionEnabled) hbRecorder.setNotificationDescription("Stop recording from the application");
-
     try{ // Requesting user permissions
       MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) reactContext.getSystemService (Context.MEDIA_PROJECTION_SERVICE);
       getCurrentActivity().startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(), SCREEN_RECORD_REQUEST_CODE);
@@ -92,7 +87,6 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
     }
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @ReactMethod
   public void stopRecording(Promise promise){
     Log.d("ScreenRecorder","stopRecording");
@@ -118,7 +112,6 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
     startPromise.resolve("started");
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   public void HBRecorderOnComplete() {
     String uri = hbRecorder.getFilePath();
@@ -135,5 +128,15 @@ public class ScreenRecorderModule extends ReactContextBaseJavaModule implements 
   public void HBRecorderOnError(int errorCode, String reason) {
     Log.d("ScreenRecorder", "HBRecorderOnError : " + errorCode + " " + reason);
     startPromise.reject("404", "RecorderOnError:" + errorCode + " " + reason);
+  }
+
+  @Override
+  public void HBRecorderOnPause() {
+
+  }
+
+  @Override
+  public void HBRecorderOnResume() {
+
   }
 }
