@@ -57,6 +57,6 @@ repositories {
 
 dependencies {
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'com.github.khanjandobariya:HBRecorder:2.0.4.9'
+    implementation "com.facebook.react:react-native:+"
+    implementation project(path: ':hbrecorder')// From node_modules
 }
