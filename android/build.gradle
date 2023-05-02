@@ -51,12 +51,12 @@ repositories {
     google()
     mavenCentral()
     jcenter()
-    // Added for HBRecorder
+
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"
-    implementation project(path: ':hbrecorder')// From node_modules
+    implementation project(":HBR")
 }
