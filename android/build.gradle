@@ -58,5 +58,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"
-    implementation 'com.github.SolankiYogesh:HBRecorderPackage:1.2'
+  implementation 'com.github.SolankiYogesh:HBRecorderPackage:1.4'
 }
